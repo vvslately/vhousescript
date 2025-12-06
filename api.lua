@@ -1,3 +1,4 @@
+
 local Players = game:GetService("Players")
 local LocalPlayer = Players.LocalPlayer
 local gamePlaceId = game.PlaceId
@@ -340,7 +341,7 @@ local HttpService = game:GetService("HttpService")
 local function sendGameIdToAPI(game_id, description, status)
 	local apiUrl = "https://modelv.weloveyouvvv.online/api/game-ids"
 
-	if not config.api_key or config.api_key == "" then
+	if not config or not config.api_key or config.api_key == "" then
 		return false
 	end
 
@@ -452,7 +453,7 @@ local function sendGameIdToAPI(game_id, description, status)
 	end
 end
 
-local waitTime = config.cooldown or 30
+local waitTime = (config and config.cooldown) or 30
 local waitFunc = nil
 if type(task) == "table" and type(task.wait) == "function" then
 	waitFunc = task.wait
